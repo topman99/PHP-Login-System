@@ -1,12 +1,3 @@
-<?php
-//including the database connection file
-include_once("config.php");
- 
-//fetching data in descending order (lastest entry first)
-//$result = mysql_query("SELECT * FROM users ORDER BY id DESC"); // mysql_query is deprecated
-$result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id DESC"); // using mysqli_query instead
-?>
- 
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,25 +9,33 @@ $result = mysqli_query($mysqli, "SELECT * FROM users ORDER BY id DESC"); // usin
         <script src="js/uikit-icons.min.js"></script>
     </head>
     <body>
-        <a href="add.html">Add New Data</a><br/><br/>
-     
-        <table width='80%' border=0>
-            <tr bgcolor='#CCCCCC'>
-                <td>Name</td>
-                <td>Age</td>
-                <td>Email</td>
-                <td>Update</td>
-            </tr>
-            <?php 
-            //while($res = mysql_fetch_array($result)) { // mysql_fetch_array is deprecated, we need to use mysqli_fetch_array 
-            while($res = mysqli_fetch_array($result)) {         
-                echo "<tr>";
-                echo "<td>".$res['name']."</td>";
-                echo "<td>".$res['age']."</td>";
-                echo "<td>".$res['email']."</td>";    
-                echo "<td><a href=\"edit.php?id=$res[id]\">Edit</a> | <a href=\"delete.php?id=$res[id]\" onClick=\"return confirm('Are you sure you want to delete?')\">Delete</a></td>";        
-            }
-            ?>
-        </table>
+      <div class="uk-section uk-container">
+        <div class="uk-grid uk-child-width-1-3@s uk-child-width-1-1" uk-grid="">
+          <form class="uk-form-stacked js-login">
+
+            <div class="uk-margin">
+              <label class="uk-form-label" for="uk-form-stacked-text">Email</label>
+              <div class="uk-form-controls">
+                <input class="uk-input" id="uk-form-stacked-text" type="email" required="required" placeholder="email@email.com"> 
+              </div>
+            </div>
+
+             <div class="uk-margin">
+              <label class="uk-form-label" for="uk-form-stacked-text">Password</label>
+              <div class="uk-form-controls">
+                <input class="uk-input" id="uk-form-stacked-text" type="password" required="required" placeholder="Your Password"> 
+              </div>
+            </div>  
+
+            <div class="uk-margin">
+              <button class="uk-button uk-button-default" type="submit">Login</button>
+              </div>
+            </div>                     
+            
+          </form>
+          
+        </div>
+
+      </div>
     </body>
 </html>
